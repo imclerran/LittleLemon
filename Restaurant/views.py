@@ -26,11 +26,11 @@ class MenuView(APIView):
     
     def get(self, request):
         menus = MenuItem.objects.all()
-        serializer = MenuSerializer(menus, many=True)
+        serializer = MenuItemSerializer(menus, many=True)
         return Response({"menus": serializer.data})
     
     def post(self, request):
-        serializer = MenuSerializer(data=request.data)
+        serializer = MenuItemSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response({"message": "MenuItem created successfully", "status": "success", "data": serializer.data}, status=201)
